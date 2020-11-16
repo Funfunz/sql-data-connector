@@ -24,8 +24,8 @@ jobs:
       uses: mirromutth/mysql-action@v1.1
       with:
         mysql database: test_db
-        mysql root password: ${{ secrets.DatabasePassword }}
-    - run: mysql -u root --password=${{ secrets.DatabasePassword }} test_db < src/test/test.sql 
+        mysql root password: ${{ secrets.DATABASEPASSWORD }}
+    - run: mysql -u root --password=${{ secrets.DATABASEPASSWORD }} test_db < src/test/test.sql 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
