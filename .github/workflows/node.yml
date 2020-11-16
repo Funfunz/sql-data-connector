@@ -21,11 +21,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
+      uses: haltuf/mysql-action@master
       with:
         mysql database: test_db
         mysql root password: ${{ secrets.DATABASEPASSWORD }}
-    - run: mysql -u root --password=${{ secrets.DATABASEPASSWORD }} test_db < src/test/test.sql 
+    - run: mysql -u root --password=${{ secrets.DATABASEPASSWORD }} test_db < src/test/test.sql
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
