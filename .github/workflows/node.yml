@@ -21,12 +21,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Setup MySQL
-    - run: mysql -u root --password=root -e 'CREATE DATABASE IF NOT EXISTS test_db;'
-    - run: mysql -u root --password=root test_db < src/test/test.sql
+      run: |
+        mysql -u root --password=root -e 'CREATE DATABASE IF NOT EXISTS test_db;'
+        mysql -u root --password=root test_db < src/test/test.sql
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build
-    - run: npm test
+    - run: |
+      npm ci
+      npm run build
+      npm test
