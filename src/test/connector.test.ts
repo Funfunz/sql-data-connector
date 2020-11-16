@@ -23,7 +23,7 @@ const connector = new Connector({
     host: "127.0.0.1",
     database: "test_db",
     user: "root",
-    password: process.env.DB_PASSWORD || '',
+    password: process.env.DB_PASSWORD || 'root',
     port: "3306"
   }
 })
