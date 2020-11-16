@@ -33,3 +33,5 @@ jobs:
         npm ci
         npm run build
         npm test
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
