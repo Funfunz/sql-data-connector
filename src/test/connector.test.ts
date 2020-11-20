@@ -1,32 +1,41 @@
 import { Connector } from '../index'
+import config from './configs/MCconfig'
+import settings from './configs/MCsettings'
+import { Funfunz } from '@funfunz/core'
 
-jest.mock('@funfunz/core/lib/middleware/utils', () => (
-  {
-    ...(jest.requireActual('@funfunz/core/lib/middleware/utils') as any),
-    getTableConfig: jest.fn(() => ({
-      properties: [
-        {
-          name: 'id',
-          model: {
-            isPk: true,
+jest.mock('@funfunz/core', () => {
+  return {
+    Funfunz: function ({config: configData, settings: settingsData}) {
+      return {
+        config: () => {
+          console.log(configData, settingsData)
+          return {
+            config: configData,
+            settings: settingsData
           }
         }
-      ]
-    }))
-  }
-))
-
-const connector = new Connector({
-  type: 'sql',
-  config: {
-    client: 'mysql2',
-    host: "127.0.0.1",
-    database: "test_db",
-    user: "root",
-    password: process.env.DB_PASSWORD || 'root',
-    port: "3306"
+      }
+    }
   }
 })
+
+const connector = new Connector(
+  {
+    type: 'sql',
+    config: {
+      client: 'mysql2',
+      host: "127.0.0.1",
+      database: "test_db",
+      user: "root",
+      password: process.env.DB_PASSWORD || 'root',
+      port: "3306"
+    }
+  },
+  new Funfunz({
+    config,
+    settings
+  })
+)
 
 let familyTestName = 'TestFamily'
 let familyUpdatedTestName = 'UpdatedTestFamily'
@@ -218,6 +227,7 @@ describe('SQL Data Connector', () => {
     return connector.query({
       entityName: 'families',
       count: true,
+      fields: [], 
     }).then(
       (result) => {
         expect(result).toBeTruthy()

@@ -1,9 +1,23 @@
 import Knex from 'knex'
 import Debug from 'debug'
-import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from '@funfunz/core/lib/types/connector'
-import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
-import { getPKs, getTableConfig } from '@funfunz/core/lib/middleware/utils'
 import { Funfunz } from '@funfunz/core'
+import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from '@funfunz/core/lib/types/connector'
+import type { ISettings } from '@funfunz/core/lib/generator/configurationTypes'
+import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
+
+function getPKs(TABLE_CONFIG) {
+  return TABLE_CONFIG.properties.filter(
+    (entity) => entity.model.isPk
+  ).map(
+    (property) => property.name
+  )
+}
+
+function getTableConfig(entity: string, settings: ISettings) {
+  return settings.filter(
+    (tableItem) => tableItem.name === entity
+  )[0]
+}
 
 const debug = Debug('funfunz:SQLDataConnector')
 
@@ -74,7 +88,7 @@ export class Connector implements DataConnector{
     
     return createQuery.insert(args.data).then(
       (ids) => {
-        const tableConfig = getTableConfig(args.entityName, this.funfunz.config())
+        const tableConfig = getTableConfig(args.entityName, this.funfunz.config().settings)
         const pks = getPKs(tableConfig)
         
         const queryArgs: IQueryArgs = args as IQueryArgs
