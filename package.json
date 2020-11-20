@@ -1,5 +1,5 @@
 {
-  "name": "sql-data-connector",
+  "name": "@funfunz/sql-data-connector",
   "version": "0.0.1",
   "description": "sql data connector for Funfunz",
   "main": "lib/index.js",
