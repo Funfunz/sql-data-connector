@@ -1,10 +1,10 @@
 import { Connector } from '../index'
 
-jest.mock('funfunz/lib/middleware/utils', () => (
+jest.mock('@funfunz/core/lib/middleware/utils', () => (
   {
-    ...(jest.requireActual('funfunz/lib/middleware/utils') as any),
+    ...(jest.requireActual('@funfunz/core/lib/middleware/utils') as any),
     getTableConfig: jest.fn(() => ({
-      columns: [
+      properties: [
         {
           name: 'id',
           model: {

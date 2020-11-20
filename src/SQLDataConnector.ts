@@ -1,8 +1,8 @@
 import Knex from 'knex'
 import Debug from 'debug'
-import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from 'funfunz/lib/types/connector'
-import type { FilterValues, IFilter, OperatorsType } from 'funfunz/lib/middleware/utils/filter'
-import { getPKs, getTableConfig } from 'funfunz/lib/middleware/utils'
+import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from '@funfunz/core/lib/types/connector'
+import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
+import { getPKs, getTableConfig } from '@funfunz/core/lib/middleware/utils'
 
 const debug = Debug('funfunz:SQLDataConnector')
 
@@ -61,7 +61,7 @@ export class Connector implements DataConnector{
         if (updatedCount === 0) {
           return []
         }
-        return this.query(args)
+        return this.query(args as IQueryArgs)
       }
     )
   }
@@ -74,7 +74,7 @@ export class Connector implements DataConnector{
         const tableConfig = getTableConfig(args.entityName)
         const pks = getPKs(tableConfig)
         
-        const queryArgs: IQueryArgs = args
+        const queryArgs: IQueryArgs = args as IQueryArgs
         queryArgs.filter = {
           _and: []
         }
