@@ -3,12 +3,15 @@ import Debug from 'debug'
 import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from '@funfunz/core/lib/types/connector'
 import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
 import { getPKs, getTableConfig } from '@funfunz/core/lib/middleware/utils'
+import { Funfunz } from '@funfunz/core'
 
 const debug = Debug('funfunz:SQLDataConnector')
 
 export class Connector implements DataConnector{
   public connection: Knex
-  constructor(connector: IDataConnector) {
+  private funfunz: Funfunz
+  constructor(connector: IDataConnector, funfunz: Funfunz) {
+    this.funfunz = funfunz
     const client = (connector.config as Record<string, string>).client
     const connection = {
       ...connector.config as Record<string, unknown>
@@ -71,7 +74,7 @@ export class Connector implements DataConnector{
     
     return createQuery.insert(args.data).then(
       (ids) => {
-        const tableConfig = getTableConfig(args.entityName)
+        const tableConfig = getTableConfig(args.entityName, this.funfunz.config())
         const pks = getPKs(tableConfig)
         
         const queryArgs: IQueryArgs = args as IQueryArgs
