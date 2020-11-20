@@ -66,3 +66,5 @@ generatedConfigs
 src
 .vscode
 gource.mp4
+tsconfig.json
+docker-compose.yml
