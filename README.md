@@ -1,4 +1,4 @@
-# Funfunz - SQL Data Connector
+# Funfunz SQL Data Connector
 
 [![Discord][discord-badge]][discord]
 [![Build Status][travis-badge]][travis]
