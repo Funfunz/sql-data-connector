@@ -1,5 +1,3 @@
-import { IHookProps } from "../../../types/hooks"
-
 export default {
   'name': 'users',
   'connector': 'mainDatabase',
@@ -152,7 +150,7 @@ export default {
   ],
   'hooks': {
     count: {
-      async beforeResolver(props: IHookProps<unknown>) {
+      async beforeResolver(props) {
         throw new Error('Not authorized')
       }
     }

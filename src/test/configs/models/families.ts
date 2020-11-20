@@ -1,5 +1,3 @@
-import { IHookProps } from '../../../types/hooks'
-
 export default {
   name: 'families',
   connector: 'mainDatabase',
@@ -165,7 +163,7 @@ export default {
   ],
   'hooks': {
     count: {
-      async afterQueryResult(props: IHookProps<unknown>) {
+      async afterQueryResult(props) {
         props.results = 69
         return props
       }
