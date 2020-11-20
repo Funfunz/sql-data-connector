@@ -43,8 +43,10 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
-    "@funfunz/core": "^0.6.0",
     "debug": "^4.2.0",
     "knex": "^0.21.12"
+  },
+  "peerDependencies": {
+    "@funfunz/core": "^0.6.0"
   }
 }
