@@ -39,9 +39,9 @@ The configuration supported for each of the databases can be checked at KnexJS
 [discord]: https://discord.gg/HwZ7zMJKwg
 
 [actions-badge]: https://github.com/funfunz/sql-data-connector/workflows/Node.js%20CI/badge.svg
-[action]: https://github.com/Funfunz/sql-data-connector/actions
+[actions]: https://github.com/Funfunz/sql-data-connector/actions
 
-[codecov-badge]: https://codecov.io/gh/Funfunz/sql-data-connector/branch/master/graph/badge.svg
+[codecov-badge]: https://codecov.io/gh/Funfunz/sql-data-connector/branch/main/graph/badge.svg
 [codecov]: https://codecov.io/gh/Funfunz/sql-data-connector
 
 [node]: https://img.shields.io/node/v/funfunz.svg
