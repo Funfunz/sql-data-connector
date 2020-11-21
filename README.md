@@ -1,7 +1,7 @@
 # Funfunz SQL Data Connector
 
 [![Discord][discord-badge]][discord]
-[![Build Status][travis-badge]][travis]
+[![Build Status][actions-badge]][actions]
 [![codecov][codecov-badge]][codecov]
 ![node][node]
 [![npm version][npm-badge]][npm]
@@ -10,7 +10,7 @@
 
 ## Documentation
 
-Just follow the [link](https://jwebcoder.github.io/funfunz/#/usage/dataConnectors/sql)
+Just follow the [link](https://funfunz.github.io/funfunz/#/usage/dataConnectors/sql)
 
 ## Features
 
@@ -38,11 +38,11 @@ The configuration supported for each of the databases can be checked at KnexJS
 [discord-badge]: https://img.shields.io/discord/774439225520554004?logo=discord
 [discord]: https://discord.gg/HwZ7zMJKwg
 
-[travis-badge]: https://travis-ci.com/JWebCoder/funfunz.svg?branch=master
-[travis]: https://travis-ci.com/JWebCoder/funfunz
+[actions-badge]: https://github.com/funfunz/sql-data-connector/workflows/Node.js%20CI/badge.svg
+[action]: https://github.com/Funfunz/sql-data-connector/actions
 
-[codecov-badge]: https://codecov.io/gh/JWebCoder/funfunz/branch/master/graph/badge.svg
-[codecov]: https://codecov.io/gh/JWebCoder/funfunz
+[codecov-badge]: https://codecov.io/gh/Funfunz/sql-data-connector/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/Funfunz/sql-data-connector
 
 [node]: https://img.shields.io/node/v/funfunz.svg
 
