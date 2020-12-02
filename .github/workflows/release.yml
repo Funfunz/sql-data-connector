@@ -12,7 +12,9 @@ env:
   VERSION_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'minor') }}
   VERSION_MAJOR: ${{ contains(github.event.pull_request.labels.*.name, 'major') }}
   GIT_USER: ${{ github.event.pull_request.merged_by.login }}
-  GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+  GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+  REPO_NAME: ${{ github.event.pull_request.repo.name }}
+  REPO_OWNER: ${{ github.event.pull_request.repo.owner.login }}
 
 
 jobs:
@@ -49,8 +51,7 @@ jobs:
           exit -1
         fi
         git push --tags -f
-        git push -u origin main
+        git push -u https://$GIT_USER:$GIT_TOKEN@github.com/$REPO_OWNER/$REPO_NAME.git main
         npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
