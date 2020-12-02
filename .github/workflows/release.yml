@@ -12,6 +12,7 @@ env:
   VERSION_MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'minor') }}
   VERSION_MAJOR: ${{ contains(github.event.pull_request.labels.*.name, 'major') }}
   GIT_USER: ${{ github.event.pull_request.merged_by.login }}
+  GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
 
 
 jobs:
@@ -52,3 +53,4 @@ jobs:
         npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
