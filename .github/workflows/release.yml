@@ -48,7 +48,7 @@ jobs:
           exit -1
         fi
         git push --tags -f
-        git push -u origin master
+        git push -u origin main
         npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
