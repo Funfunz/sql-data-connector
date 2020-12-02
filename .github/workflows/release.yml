@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
     - uses: actions/setup-node@v1
       with:
         node-version: 12
@@ -50,7 +52,7 @@ jobs:
         else
           exit -1
         fi
-        git push --tags -f
+        git push --tags -f https://$GIT_USER:$GIT_TOKEN@github.com/$REPO_OWNER/$REPO_NAME.git
         git push -u https://$GIT_USER:$GIT_TOKEN@github.com/$REPO_OWNER/$REPO_NAME.git main
         npm publish
       env:
