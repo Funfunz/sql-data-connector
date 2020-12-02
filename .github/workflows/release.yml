@@ -13,8 +13,8 @@ env:
   VERSION_MAJOR: ${{ contains(github.event.pull_request.labels.*.name, 'major') }}
   GIT_USER: ${{ github.event.pull_request.merged_by.login }}
   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-  REPO_NAME: ${{ github.event.pull_request.repo.name }}
-  REPO_OWNER: ${{ github.event.pull_request.repo.owner.login }}
+  REPO_NAME: ${{ github.event.repo.name }}
+  REPO_OWNER: ${{ github.event.repo.owner.login }}
 
 
 jobs:
