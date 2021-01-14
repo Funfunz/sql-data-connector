@@ -54,4 +54,3 @@ The configuration supported for each of the databases can be checked at KnexJS
 
 [license-badge]: https://img.shields.io/github/license/JWebCoder/funfunz.svg
 [license]: https://github.com/JWebCoder/funfunz/blob/master/LICENSE
-
