@@ -1,159 +1,39 @@
 export default {
-  'name': 'images',
-  'connector': 'mainDatabase',
-  'visible': true,
-  'roles': {
-    'create': [
-      'all'
-    ],
-    'read': [
-      'all'
-    ],
-    'update': [
-      'all'
-    ],
-    'delete': [
-      'all'
-    ]
-  },
-  'properties': [
+  name: 'images',
+  connector: 'mainDatabase',
+  visible: true,
+  properties: [
     {
-      'name': 'id',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': true,
-        'relation': true
-      },
-      'model': {
-        'type': 'bigint',
-        'allowNull': false,
-        'isPk': true
-      },
-      'layout': {
-        'label': 'Id',
-        'listColumn': {},
-        'editField': {}
-      }
+      name: 'id',
+      type: 'number',
+      isPk: true
     },
     {
-      'name': 'name',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': true,
-        'relation': false
-      },
-      'model': {
-        'type': 'varchar(255)',
-        'allowNull': true
-      },
-      'layout': {
-        'label': 'Name',
-        'listColumn': {},
-        'editField': {
-          'type': 'text'
-        }
-      }
+      name: 'name',
+      type: 'string',
     },
     {
-      'name': 'main',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': true,
-        'relation': false
-      },
-      'model': {
-        'type': 'tinyint(1)',
-        'allowNull': false
-      },
-      'layout': {
-        'label': 'Main',
-        'listColumn': {},
-        'editField': {
-          'type': 'checkbox'
-        }
-      }
+      name: 'main',
+      type: 'number',
     },
     {
-      'name': 'createdAt',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': false,
-        'relation': false
-      },
-      'model': {
-        'type': 'datetime',
-        'allowNull': false
-      },
-      'layout': {
-        'label': 'CreatedAt',
-        'listColumn': {},
-        'editField': {
-          'type': 'date'
-        }
-      }
+      name: 'createdAt',
+      type: 'string',
     },
     {
-      'name': 'updatedAt',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': false,
-        'relation': false
-      },
-      'model': {
-        'type': 'datetime',
-        'allowNull': false
-      },
-      'layout': {
-        'label': 'UpdatedAt',
-        'listColumn': {},
-        'editField': {
-          'type': 'date'
-        }
-      }
+      name: 'updatedAt',
+      type: 'string',
     },
     {
-      'name': 'ProductId',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': true,
-        'relation': false
-      },
-      'model': {
-        'type': 'int',
-        'allowNull': true
-      },
-      'layout': {
-        'label': 'ProductId',
-        'listColumn': {},
-        'editField': {
-          'type': 'number'
-        }
-      }
+      name: 'ProductId',
+      type: 'number',
     }
   ],
-  'layout': {
-    'label': 'Images',
-    'listPage': {},
-    'searchField': {},
-    'createButton': {},
-    'editButton': {},
-    'deleteButton': {},
-    'editPage': {
-      'sections': []
-    }
-  },
-  'relations': [
+  relations: [
     {
-      'type': 'n:1',
-      'relationalTable': 'images',
-      'foreignKey': 'ProductId',
-      'remoteTable': 'products'
+      type: 'n:1',
+      foreignKey: 'ProductId',
+      remoteEntity: 'products'
     }
   ]
 }

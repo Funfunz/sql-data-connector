@@ -7,7 +7,7 @@ import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/mid
 
 function getPKs(TABLE_CONFIG) {
   return TABLE_CONFIG.properties.filter(
-    (entity) => entity.model.isPk
+    (entity) => entity.isPk
   ).map(
     (property) => property.name
   )
