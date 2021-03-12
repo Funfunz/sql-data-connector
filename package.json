@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "debug": "^4.2.0",
+    "graphql": "^15.5.0",
     "knex": "^0.21.12"
   },
   "peerDependencies": {
