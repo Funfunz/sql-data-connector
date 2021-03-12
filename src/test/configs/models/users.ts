@@ -1,169 +1,48 @@
 export default {
-  'name': 'users',
-  'connector': 'mainDatabase',
-  'visible': true,
-  'roles': {
-    'create': [
-      'admin'
-    ],
-    'read': [
-      'admin'
-    ],
-    'update': [
-      'admin'
-    ],
-    'delete': [
-      'admin'
-    ]
-  },
-  'relations': [
+  name: 'users',
+  connector: 'mainDatabase',
+  visible: true,
+  relations: [
     {
-      'type': 'm:n',
-      'relationalTable': 'usersroles',
-      'foreignKey': 'userId',
-      'remoteTable': 'roles',
-      'remoteForeignKey': 'roleId',
+      type: 'm:n',
+      relationalEntity: 'usersroles',
+      foreignKey: 'userId',
+      remoteEntity: 'roles',
+      remoteForeignKey: 'roleId',
     },
   ],
-  'properties': [
+  properties: [
     {
-      'name': 'id',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': true,
-        'relation': true
-      },
-      'model': {
-        'type': 'int',
-        'allowNull': false,
-        'isPk': true
-      },
-      'layout': {
-        'label': 'Id',
-        'listColumn': {},
-        'editField': {
-          'type': 'number'
-        }
-      }
+      name: 'id',
+      type: 'number',
+      isPk: true
     },
     {
-      'name': 'email',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': true,
-        'relation': false
-      },
-      'model': {
-        'type': 'varchar(255)',
-        'allowNull': false
-      },
-      'layout': {
-        'label': 'Email',
-        'listColumn': {},
-        'editField': {
-          'type': 'text'
-        }
-      }
+      name: 'email',
+      type: 'string',
     },
     {
-      'name': 'name',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': true,
-        'relation': false
-      },
-      'model': {
-        'type': 'varchar(255)',
-        'allowNull': true
-      },
-      'layout': {
-        'label': 'Name',
-        'listColumn': {},
-        'editField': {
-          'type': 'text'
-        }
-      }
+      name: 'name',
+      type: 'string',
     },
     {
-      'name': 'password',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': true,
-        'relation': false
-      },
-      'model': {
-        'type': 'varchar(255)',
-        'allowNull': true
-      },
-      'layout': {
-        'label': 'Password',
-        'listColumn': {},
-        'editField': {
-          'type': 'text'
-        }
-      }
+      name: 'password',
+      type: 'string',
     },
     {
-      'name': 'createdAt',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': false,
-        'relation': false
-      },
-      'model': {
-        'type': 'datetime',
-        'allowNull': false
-      },
-      'layout': {
-        'label': 'CreatedAt',
-        'listColumn': {},
-        'editField': {
-          'type': 'date'
-        }
-      }
+      name: 'createdAt',
+      type: 'string',
     },
     {
-      'name': 'updatedAt',
-      'searchable': true,
-      'visible': {
-        'list': true,
-        'detail': false,
-        'relation': false
-      },
-      'model': {
-        'type': 'datetime',
-        'allowNull': false
-      },
-      'layout': {
-        'label': 'UpdatedAt',
-        'listColumn': {},
-        'editField': {
-          'type': 'date'
-        }
-      }
+      name: 'updatedAt',
+      type: 'string',
     }
   ],
-  'hooks': {
+  hooks: {
     count: {
       async beforeResolver(props) {
         throw new Error('Not authorized')
       }
     }
   },
-  'layout': {
-    'label': 'Users',
-    'listPage': {},
-    'searchField': {},
-    'createButton': {},
-    'editButton': {},
-    'deleteButton': {},
-    'editPage': {
-      'sections': []
-    }
-  }
 }
