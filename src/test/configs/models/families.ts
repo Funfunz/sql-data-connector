@@ -32,11 +32,9 @@ export default {
         'detail': true,
         'relation': true
       },
-      'model': {
-        'type': 'int',
-        'allowNull': false,
-        'isPk': true
-      },
+      'type': 'int',
+      'allowNull': false,
+      'isPk': true,
       'layout': {
         'label': 'Id',
         'listColumn': {},
@@ -53,10 +51,8 @@ export default {
         'detail': true,
         'relation': false
       },
-      'model': {
-        'type': 'int',
-        'allowNull': true
-      },
+      'type': 'int',
+      'allowNull': true,
       'layout': {
         'label': 'Order',
         'listColumn': {},
@@ -68,10 +64,8 @@ export default {
     {
       'name': 'imageUrl',
       'searchable': true,
-      'model': {
-        'type': 'varchar(255)',
-        'allowNull': true
-      },
+      'type': 'varchar(255)',
+      'allowNull': true,
       'layout': {
         'label': 'ImageUrl',
         'listColumn': {},
@@ -88,10 +82,8 @@ export default {
         'detail': true,
         'relation': false,
       },
-      'model': {
-        'type': 'varchar(255)',
-        'allowNull': false
-      },
+      'type': 'varchar(255)',
+      'allowNull': false,
       'layout': {
         'label': 'Name',
         'listColumn': {},
@@ -108,10 +100,8 @@ export default {
         'detail': true,
         'relation': false
       },
-      'model': {
-        'type': 'varchar(255)',
-        'allowNull': true
-      },
+      'type': 'varchar(255)',
+      'allowNull': true,
       'layout': {
         'label': 'Email',
         'listColumn': {},
@@ -128,10 +118,8 @@ export default {
         'detail': false,
         'relation': false
       },
-      'model': {
-        'type': 'datetime',
-        'allowNull': false
-      },
+      'type': 'datetime',
+      'allowNull': false,
       'layout': {
         'label': 'CreatedAt',
         'listColumn': {},
@@ -148,10 +136,8 @@ export default {
         'detail': false,
         'relation': false
       },
-      'model': {
-        'type': 'datetime',
-        'allowNull': false
-      },
+      'type': 'datetime',
+      'allowNull': false,
       'layout': {
         'label': 'UpdatedAt',
         'listColumn': {},

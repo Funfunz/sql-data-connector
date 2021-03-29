@@ -1,17 +1,17 @@
 import { Connector } from '../index'
 import config from './configs/MCconfig'
-import settings from './configs/MCsettings'
+import entities from './configs/MCsettings'
 import { Funfunz } from '@funfunz/core'
 
 jest.mock('@funfunz/core', () => {
   return {
-    Funfunz: function ({config: configData, settings: settingsData}) {
+    Funfunz: function ({config: configData, entities: entitiesData}) {
       return {
         config: () => {
-          console.log(configData, settingsData)
+          console.log(configData, entitiesData)
           return {
             config: configData,
-            settings: settingsData
+            entities: entitiesData
           }
         }
       }
@@ -21,19 +21,21 @@ jest.mock('@funfunz/core', () => {
 
 const connector = new Connector(
   {
-    type: 'sql',
+    connector: Connector as any,
     config: {
       client: 'mysql2',
       host: "127.0.0.1",
       database: "test_db",
       user: "root",
-      password: process.env.DB_PASSWORD || 'root',
-      port: "3306"
+      password: process.env.DB_PASSWORD || 'password',
+      port: "2947"
     }
   },
   new Funfunz({
+    // @ts-ignore
     config,
-    settings
+    // @ts-ignore
+    entities
   })
 )
 
@@ -60,7 +62,7 @@ describe('SQL Data Connector', () => {
     }).then(
       (result) => {
         const typedResult = result as Record<string, unknown>[]
-        expect(typedResult.length).toBe(2)
+        expect(typedResult.length).toBeTruthy()
         expect(Object.keys(typedResult[0]).filter(
           key => {
             return fields.includes(key)
@@ -181,7 +183,6 @@ describe('SQL Data Connector', () => {
       skip: 1,
     }).then(
       (result) => {
-        console.log(result)
         const typedResult = result as Record<string, unknown>[]
         expect(typedResult.length).toBe(1)
         expect(Object.keys(typedResult[0]).filter(
@@ -251,6 +252,7 @@ describe('SQL Data Connector', () => {
     }).then(
       (result) => {
         const typedResult = result as Record<string, unknown>[]
+        console.log(typedResult)
         expect(typedResult[0].id).toBeTruthy()
         createdId = typedResult[0].id as number
         expect(typedResult[0].name).toBe(familyTestName)

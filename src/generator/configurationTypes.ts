@@ -1,6 +1,6 @@
-import { OperatorsType } from '../middleware/utils/filter'
-import { IDataConnector } from '../types/connector'
-import { ITableHooks } from '../types/hooks'
+import { OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
+import { IDataConnector } from '@funfunz/core/lib/types/connector'
+import { IHooks } from '@funfunz/core/lib/types/hooks'
 
 export interface IDatabaseData {
   schema: schemaInfo,
@@ -41,7 +41,7 @@ export interface IEntityInfo {
   visible: boolean,
   relations?: IRelation[],
   properties: IPropertyInfo[],
-  hooks?: ITableHooks,
+  hooks?: IHooks,
   layout?: Record<string, unknown>,
 }
 

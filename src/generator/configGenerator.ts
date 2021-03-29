@@ -1,4 +1,4 @@
-import { describeInfo, IPropertyInfo, IConfig, ISettings, IEntityInfo, schemaInfo } from './configurationTypes'
+import { describeInfo, IPropertyInfo, ISettings, IEntityInfo, schemaInfo } from './configurationTypes'
 import Debug from 'debug'
 import fs from 'fs'
 import path from 'path'
@@ -131,10 +131,10 @@ export function generateSettings(
 }
 
 export function generateConfig(answers: Record<string, string>, selectedPath: string): void {
-  const finalConfig: IConfig = {
+  const finalConfig = {
     connectors: {
       [answers.DBType]: {
-        type: answers.DBType as 'sql',
+        connector: answers.DBType,
         config: {
           host: answers.DBHost,
           database: answers.DBName,

@@ -2,20 +2,21 @@ import Knex from 'knex'
 import Debug from 'debug'
 import { Funfunz } from '@funfunz/core'
 import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from '@funfunz/core/lib/types/connector'
-import type { ISettings } from '@funfunz/core/lib/generator/configurationTypes'
+import type { IEntityInfo } from '@funfunz/core/lib/generator/configurationTypes'
 import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
 
-function getPKs(TABLE_CONFIG) {
+function getPKs(TABLE_CONFIG: IEntityInfo) {
   return TABLE_CONFIG.properties.filter(
-    (entity) => entity.model.isPk
+    (entity) => entity.isPk
   ).map(
     (property) => property.name
   )
 }
 
-function getTableConfig(entity: string, settings: ISettings) {
-  return settings.filter(
-    (tableItem) => tableItem.name === entity
+function getEntityConfig(entity: string, entities: IEntityInfo[]) {
+  console.log('entities', entities)
+  return entities.filter(
+    (entityData) => entityData.name === entity
   )[0]
 }
 
@@ -31,6 +32,10 @@ export class Connector implements DataConnector{
       ...connector.config as Record<string, unknown>
     }
     delete connection.client
+    console.log('knex config', {
+      client: client,
+      connection,
+    })
     this.connection = Knex({
       client: client,
       connection,
@@ -84,12 +89,14 @@ export class Connector implements DataConnector{
   }
 
   public create(args: ICreateArgs): Promise<Record<string, unknown>[] | Record<string, unknown> | number> {
+    console.log('Inside connector create', args)
     const createQuery = this.connection(args.entityName)
-    
+    console.log('query', createQuery)
     return createQuery.insert(args.data).then(
       (ids) => {
-        const tableConfig = getTableConfig(args.entityName, this.funfunz.config().settings)
-        const pks = getPKs(tableConfig)
+        console.log('data created', ids)
+        const entityConfig = getEntityConfig(args.entityName, this.funfunz.config().entities)
+        const pks = getPKs(entityConfig)
         
         const queryArgs: IQueryArgs = args as IQueryArgs
         queryArgs.filter = {
@@ -100,7 +107,14 @@ export class Connector implements DataConnector{
           (id) => {
             pks.forEach(
               (pk, index) => {
-                queryArgs.filter?._and?.push({
+                if (!queryArgs.filter) {
+                  queryArgs.filter = {
+                    _and: []
+                  }
+                } else if (!queryArgs.filter._and) {
+                  queryArgs.filter._and = []
+                }
+                (queryArgs.filter._and as Array<unknown>).push({
                   [pk]: {
                     _eq: Array.isArray(id) ? id[index] : id
                   }
