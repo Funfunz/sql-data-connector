@@ -8,7 +8,7 @@ const config = {
         database: "test_db",
         user: "root",
         password: process.env.DB_PASSWORD || '',
-        port: "2947"
+        port: "3306"
       },
     }
   }
