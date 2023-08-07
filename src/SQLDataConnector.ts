@@ -1,6 +1,6 @@
-import Knex from 'knex'
+import knex, { Knex } from 'knex'
 import Debug from 'debug'
-import { Funfunz } from '@funfunz/core'
+import { Funfunz } from '@funfunz/core/lib/index'
 import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from '@funfunz/core/lib/types/connector'
 import type { IEntityInfo } from '@funfunz/core/lib/generator/configurationTypes'
 import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
@@ -14,7 +14,6 @@ function getPKs(TABLE_CONFIG: IEntityInfo) {
 }
 
 function getEntityConfig(entity: string, entities: IEntityInfo[]) {
-  console.log('entities', entities)
   return entities.filter(
     (entityData) => entityData.name === entity
   )[0]
@@ -32,13 +31,12 @@ export class Connector implements DataConnector{
       ...connector.config as Record<string, unknown>
     }
     delete connection.client
-    console.log('knex config', {
+   
+    this.connection = knex({
       client: client,
       connection,
-    })
-    this.connection = Knex({
-      client: client,
-      connection,
+      asyncStackTraces: true,
+      debug: true
     })
     debug('Start')
     Object.keys(connector).forEach(
@@ -89,12 +87,9 @@ export class Connector implements DataConnector{
   }
 
   public create(args: ICreateArgs): Promise<Record<string, unknown>[] | Record<string, unknown> | number> {
-    console.log('Inside connector create', args)
     const createQuery = this.connection(args.entityName)
-    console.log('query', createQuery)
     return createQuery.insert(args.data).then(
       (ids) => {
-        console.log('data created', ids)
         const entityConfig = getEntityConfig(args.entityName, this.funfunz.config().entities)
         const pks = getPKs(entityConfig)
         

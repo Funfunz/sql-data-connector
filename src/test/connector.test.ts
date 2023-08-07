@@ -1,14 +1,13 @@
 import { Connector } from '../index'
 import config from './configs/MCconfig'
 import entities from './configs/MCsettings'
-import { Funfunz } from '@funfunz/core'
+import { Funfunz } from '@funfunz/core/lib/index'
 
-jest.mock('@funfunz/core', () => {
+jest.mock('@funfunz/core/lib/index', () => {
   return {
     Funfunz: function ({config: configData, entities: entitiesData}) {
       return {
         config: () => {
-          console.log(configData, entitiesData)
           return {
             config: configData,
             entities: entitiesData
@@ -28,7 +27,7 @@ const connector = new Connector(
       database: "test_db",
       user: "root",
       password: process.env.DB_PASSWORD || 'password',
-      port: "2947"
+      port: "3306"
     }
   },
   new Funfunz({
@@ -211,7 +210,6 @@ describe('SQL Data Connector', () => {
       take: 1,
     }).then(
       (result) => {
-        console.log(result)
         const typedResult = result as Record<string, unknown>[]
         expect(typedResult.length).toBe(1)
         expect(Object.keys(typedResult[0]).filter(
@@ -252,7 +250,6 @@ describe('SQL Data Connector', () => {
     }).then(
       (result) => {
         const typedResult = result as Record<string, unknown>[]
-        console.log(typedResult)
         expect(typedResult[0].id).toBeTruthy()
         createdId = typedResult[0].id as number
         expect(typedResult[0].name).toBe(familyTestName)
