@@ -1,6 +1,6 @@
 import knex, { Knex } from 'knex'
 import Debug from 'debug'
-import { Funfunz } from '@funfunz/core/lib/index'
+import { Funfunz } from '@funfunz/core'
 import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from '@funfunz/core/lib/types/connector'
 import type { IEntityInfo } from '@funfunz/core/lib/generator/configurationTypes'
 import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
@@ -45,6 +45,10 @@ export class Connector implements DataConnector{
       }
     )
     debug('End')
+  }
+
+  public stop(): void {
+    this.connection.destroy()
   }
 
   public query(args: IQueryArgs): Promise<Record<string, unknown>[] | number> {
