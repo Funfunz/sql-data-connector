@@ -1,6 +1,6 @@
 import knex, { Knex } from 'knex'
 import Debug from 'debug'
-import { Funfunz } from '@funfunz/core'
+import { Funfunz } from '@funfunz/core/lib/index'
 import type { ICreateArgs, IQueryArgs, IRemoveArgs, IUpdateArgs, DataConnector, IDataConnector } from '@funfunz/core/lib/types/connector'
 import type { IEntityInfo } from '@funfunz/core/lib/generator/configurationTypes'
 import type { FilterValues, IFilter, OperatorsType } from '@funfunz/core/lib/middleware/utils/filter'
