@@ -151,29 +151,29 @@ export class Connector implements DataConnector{
     filters: IFilter,
     unionOperator?: string,
   ): Knex.QueryBuilder<Record<string, unknown>, unknown> {
+    let whereFound = false
     Object.keys(filters).forEach(
       (key) => {
         if (key === '_and' || key === '_or') {
           
           const value = (filters[key] as IFilter['_and'] | IFilter['_or']) || []
-        
           let where = 'where'
           if (key === '_or'){
             where = 'orWhere'
           } else if (key === '_and') {
-            where = 'andWhere'
+            if (!whereFound) {
+              where = 'andWhere'  
+            }
+            whereFound = true
           }
   
           value.forEach(
             (entry) => {
-              const newFilters = {} 
-              const entryKey = Object.keys(entry)[0]
-              newFilters[entryKey] = entry[entryKey]
               QUERY[where](
                 (innerQuery) => {
                   this.applyQueryFilters(
                     innerQuery,
-                    newFilters,
+                    entry,
                     key === '_and' ? 'and' : 'or'
                   )
                 }
